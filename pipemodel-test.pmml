@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PMML xmlns="http://www.dmg.org/PMML-4_4" xmlns:data="http://jpmml.org/jpmml-model/InlineTable" version="4.3">
+    <Header>
+        <Application name="JPMML-SparkML" version="1.5.9"/>
+        <Timestamp>2020-08-05T13:55:52Z</Timestamp>
+    </Header>
+    <DataDictionary>
+        <DataField name="petal_width" optype="categorical" dataType="string">
+            <Value value="0.2"/>
+            <Value value="1.3"/>
+            <Value value="1.5"/>
+            <Value value="0.4"/>
+            <Value value="1.4"/>
+            <Value value="0.3"/>
+            <Value value="1.0"/>
+            <Value value="0.1"/>
+            <Value value="1.2"/>
+            <Value value="1.1"/>
+            <Value value="1.6"/>
+            <Value value="0.5"/>
+            <Value value="1.7"/>
+            <Value value="0.6"/>
+            <Value value="1.8"/>
+        </DataField>
+        <DataField name="sepal_length" optype="continuous" dataType="double"/>
+        <DataField name="sepal_width" optype="continuous" dataType="double"/>
+        <DataField name="petal_length" optype="continuous" dataType="double"/>
+        <DataField name="label" optype="categorical" dataType="double">
+            <Value value="0"/>
+            <Value value="1"/>
+        </DataField>
+    </DataDictionary>
+    <TransformationDictionary/>
+    <RegressionModel functionName="classification" normalizationMethod="logit">
+        <MiningSchema>
+            <MiningField name="label" usageType="target"/>
+            <MiningField name="petal_width"/>
+            <MiningField name="sepal_length"/>
+            <MiningField name="sepal_width"/>
+            <MiningField name="petal_length"/>
+        </MiningSchema>
+        <Output>
+            <OutputField name="pmml(prediction)" optype="categorical" dataType="double" isFinalResult="false"/>
+            <OutputField name="prediction" optype="continuous" dataType="double" feature="transformedValue">
+                <MapValues outputColumn="data:output" dataType="double">
+                    <FieldColumnPair field="pmml(prediction)" column="data:input"/>
+                    <InlineTable>
+                        <row>
+                            <data:input>0</data:input>
+                            <data:output>0</data:output>
+                        </row>
+                        <row>
+                            <data:input>1</data:input>
+                            <data:output>1</data:output>
+                        </row>
+                    </InlineTable>
+                </MapValues>
+            </OutputField>
+            <OutputField name="probability(0)" optype="continuous" dataType="double" feature="probability" value="0"/>
+            <OutputField name="probability(1)" optype="continuous" dataType="double" feature="probability" value="1"/>
+        </Output>
+        <RegressionTable intercept="-0.35652298506335317" targetCategory="1">
+            <NumericPredictor name="sepal_length" coefficient="4.386704917040299"/>
+            <NumericPredictor name="sepal_width" coefficient="-12.176411968674852"/>
+            <NumericPredictor name="petal_length" coefficient="6.090507136149227"/>
+            <CategoricalPredictor name="petal_width" value="0.2" coefficient="-12.42706970289986"/>
+            <CategoricalPredictor name="petal_width" value="1.3" coefficient="6.766477995725868"/>
+            <CategoricalPredictor name="petal_width" value="1.5" coefficient="5.290176573100581"/>
+            <CategoricalPredictor name="petal_width" value="0.4" coefficient="-10.102689909480713"/>
+            <CategoricalPredictor name="petal_width" value="1.4" coefficient="4.894191581791746"/>
+            <CategoricalPredictor name="petal_width" value="0.3" coefficient="-15.190023604356995"/>
+            <CategoricalPredictor name="petal_width" value="1.0" coefficient="6.256136500828763"/>
+            <CategoricalPredictor name="petal_width" value="0.1" coefficient="-10.883425552828072"/>
+            <CategoricalPredictor name="petal_width" value="1.2" coefficient="5.506660035160129"/>
+            <CategoricalPredictor name="petal_width" value="1.1" coefficient="9.043994343446183"/>
+            <CategoricalPredictor name="petal_width" value="1.6" coefficient="8.61825902106249"/>
+            <CategoricalPredictor name="petal_width" value="0.5" coefficient="-10.779700242777585"/>
+            <CategoricalPredictor name="petal_width" value="1.7" coefficient="1.4198479510919209"/>
+            <CategoricalPredictor name="petal_width" value="0.6" coefficient="-9.314510119148924"/>
+        </RegressionTable>
+        <RegressionTable intercept="0.0" targetCategory="0"/>
+    </RegressionModel>
+</PMML>

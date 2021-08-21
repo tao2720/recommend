@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PMML xmlns="http://www.dmg.org/PMML-4_4" xmlns:data="http://jpmml.org/jpmml-model/InlineTable" version="4.3">
+    <Header>
+        <Application name="JPMML-SparkML" version="1.5.9"/>
+        <Timestamp>2020-08-05T02:22:04Z</Timestamp>
+    </Header>
+    <DataDictionary>
+        <DataField name="f1" optype="continuous" dataType="double"/>
+        <DataField name="f2" optype="continuous" dataType="double"/>
+        <DataField name="f3" optype="continuous" dataType="double"/>
+        <DataField name="f4" optype="continuous" dataType="double"/>
+        <DataField name="label" optype="categorical" dataType="integer">
+            <Value value="0"/>
+            <Value value="1"/>
+        </DataField>
+    </DataDictionary>
+    <TransformationDictionary/>
+    <RegressionModel functionName="classification" normalizationMethod="logit">
+        <MiningSchema>
+            <MiningField name="label" usageType="target"/>
+            <MiningField name="f1"/>
+            <MiningField name="f2"/>
+            <MiningField name="f3"/>
+            <MiningField name="f4"/>
+        </MiningSchema>
+        <Output>
+            <OutputField name="pmml(prediction)" optype="categorical" dataType="integer" isFinalResult="false"/>
+            <OutputField name="prediction" optype="continuous" dataType="double" feature="transformedValue">
+                <MapValues outputColumn="data:output" dataType="double">
+                    <FieldColumnPair field="pmml(prediction)" column="data:input"/>
+                    <InlineTable>
+                        <row>
+                            <data:input>0</data:input>
+                            <data:output>0</data:output>
+                        </row>
+                        <row>
+                            <data:input>1</data:input>
+                            <data:output>1</data:output>
+                        </row>
+                    </InlineTable>
+                </MapValues>
+            </OutputField>
+            <OutputField name="probability(0)" optype="continuous" dataType="double" feature="probability" value="0"/>
+            <OutputField name="probability(1)" optype="continuous" dataType="double" feature="probability" value="1"/>
+        </Output>
+        <RegressionTable intercept="-1.979557474498824" targetCategory="1">
+            <NumericPredictor name="f1" coefficient="-0.805920436998945"/>
+            <NumericPredictor name="f2" coefficient="-12.098913883790336"/>
+            <NumericPredictor name="f3" coefficient="9.068073983322742"/>
+            <NumericPredictor name="f4" coefficient="22.69041559187648"/>
+        </RegressionTable>
+        <RegressionTable intercept="0.0" targetCategory="0"/>
+    </RegressionModel>
+</PMML>
